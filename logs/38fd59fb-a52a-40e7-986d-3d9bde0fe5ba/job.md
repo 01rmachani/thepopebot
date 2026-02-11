@@ -1,0 +1,1 @@
+Read the file at operating_system/TRIP_PLANNER/ and create a comprehensive trip plan for this weekend in San Jose. Include recommendations for activities, dining, transportation, and any other relevant travel information for a weekend visit to San Jose.
