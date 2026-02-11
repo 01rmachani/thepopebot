@@ -1,6 +1,62 @@
-# Daily Financial Report
+# Daily Financial Report — February 11, 2026
 
-> No report has been generated yet. The first report will be created at the next scheduled run (6:00 AM Pacific, weekdays).
+> Generated at 14:01 UTC | Pre-market briefing
+
+---
+
+## ⚠️ Setup Required
+
+**This financial advisor agent requires additional configuration to function properly.**
+
+To enable daily market research and report generation, please:
+
+1. **Set up Brave Search API access:**
+   - Create an account at https://api-dashboard.search.brave.com/register
+   - Create a "Free AI" subscription (credit card required but no charges)
+   - Generate an API key
+   - Add the API key to your LLM_SECRETS configuration as `BRAVE_API_KEY`
+
+2. **Install dependencies:**
+   ```bash
+   cd /job/.pi/skills/brave-search
+   npm install
+   ```
+
+3. **Test the setup:**
+   ```bash
+   cd /job/.pi/skills/brave-search
+   ./search.js "stock market today" --freshness pd -n 3
+   ```
+
+Once configured, this agent will automatically generate comprehensive daily financial reports including:
+
+- 📊 Major indices (S&P 500, Dow, Nasdaq, Russell 2000)
+- 🌍 Global markets (Asia-Pacific, Europe)
+- 📈 Bond yields and interest rates
+- 🛢️ Commodities (Oil, Gold, Silver, Natural Gas)
+- 💱 Currency rates (DXY, EUR/USD, USD/JPY, GBP/USD)
+- 📰 Key financial headlines
+- 🏭 Sector performance
+- 📅 Economic calendar events
+- 🔍 Market analysis and outlook
+
+---
+
+## 📋 Configuration Status
+
+| Component | Status | Notes |
+|-----------|--------|--------|
+| Brave Search API | ❌ Not configured | BRAVE_API_KEY not found in LLM_SECRETS |
+| Report template | ✅ Ready | Template file exists |
+| Dependencies | ❓ Unknown | Run `npm install` in brave-search skill directory |
+
+---
+
+## 🔧 Next Steps
+
+1. **For Repository Owner:** Add `BRAVE_API_KEY` to your LLM_SECRETS configuration
+2. **For Cron Job:** Once configured, this agent can be scheduled to run daily at market open
+3. **Manual Run:** Execute this job manually after setup to test functionality
 
 ---
 
