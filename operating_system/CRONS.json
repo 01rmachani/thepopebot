@@ -57,5 +57,12 @@
     "type": "agent",
     "job": "Read the template at operating_system/ai_in_robotics/TEMPLATE.md and generate a fresh daily digest at operating_system/ai_in_robotics/DIGEST.md with current AI robotics developments.",
     "enabled": true
+  },
+  {
+    "name": "ai-digest",
+    "schedule": "0 7 * * *",
+    "type": "agent",
+    "job": "Read the file at operating_system/AI_DIGEST.md and complete the tasks described there.",
+    "enabled": true
   }
 ]
