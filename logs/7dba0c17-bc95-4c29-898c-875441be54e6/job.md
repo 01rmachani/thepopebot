@@ -1,0 +1,1 @@
+Create a test job that demonstrates multiple capabilities: 1) Create a directory at logs/multi-test-[timestamp]/ 2) Generate a JSON file with system information (current time, random number, sample data array) 3) Create a simple HTML file with basic styling that displays "Test Job Complete" 4) Write a detailed markdown summary of all actions taken with file sizes and timestamps
