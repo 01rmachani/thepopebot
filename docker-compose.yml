@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  popebot:
+    image: ubuntu
+    container_name: the_popebot_1
+    volumes:
+      - ./thepopebot:/thepopebot
+      - ./supervisord.conf:/etc/supervisor/conf.d/popebot.conf
+      - ./startup.sh:/startup.sh
+      - gh-config:/root/.config/gh
+      - ngrok-config:/root/.config/ngrok
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    entrypoint: ["/bin/bash", "/startup.sh"]
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
+volumes:
+  gh-config:
+  ngrok-config:
