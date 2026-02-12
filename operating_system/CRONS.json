@@ -50,5 +50,12 @@
     "type": "agent",
     "job": "Read the file at operating_system/FINANCIAL_ADVISOR/FINANCIAL_ADVISOR.md and complete the tasks described there.",
     "enabled": true
+  },
+  {
+    "name": "ai-robotics-digest",
+    "schedule": "0 9 * * *",
+    "type": "agent",
+    "job": "Read the template at operating_system/ai_in_robotics/TEMPLATE.md and generate a fresh daily digest at operating_system/ai_in_robotics/DIGEST.md with current AI robotics developments.",
+    "enabled": true
   }
 ]
