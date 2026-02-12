@@ -1,0 +1,1 @@
+Create a simple test file at logs/test-job-[timestamp]/hello.txt with the current date, time, and a friendly greeting message. Then create a small markdown report at logs/test-job-[timestamp]/report.md documenting what was accomplished.
