@@ -1,127 +1,320 @@
-# thepopebot
+# Cab Booking Service API - Complete Documentation
 
-**Autonomous AI agents. All the power. None of the leaked API keys.**
+## Overview
 
----
+This repository contains a comprehensive API specification for a minimal yet complete online cab booking service. The documentation provides everything needed to implement a production-ready service that handles the complete user journey from registration to ride completion.
 
-## Why thepopebot?
+## 📋 Table of Contents
 
-**Secure by default** — Other frameworks hand credentials to the LLM and hope for the best. thepopebot is different: the AI literally cannot access your secrets, even if it tries. Secrets are filtered at the process level before the agent's shell even starts.
+1. [Core API Specification](#core-api-specification)
+2. [Documentation Structure](#documentation-structure)
+3. [Key Features](#key-features)
+4. [Quick Start](#quick-start)
+5. [Architecture Overview](#architecture-overview)
+6. [Security & Authentication](#security--authentication)
+7. [Implementation Guidelines](#implementation-guidelines)
+8. [Next Steps](#next-steps)
 
-**The repository IS the agent** — Every action your agent takes is a git commit. You can see exactly what it did, when, and why. If it screws up, revert it. Want to clone your agent? Fork the repo — code, personality, scheduled jobs, full history, all of it goes with your fork.
+## 🚀 Core API Specification
 
-**Free compute, built in** — Every GitHub account comes with free cloud computing time. thepopebot uses that to run your agent. One task or a hundred in parallel — the compute is already included.
-
-**Self-evolving** — The agent modifies its own code through pull requests. Every change is auditable, every change is reversible. You stay in control.
-
----
-
-## How It Works
+The API is designed around the core user journey:
 
 ```
-┌───────────────────────────────────────────────────────────────────────┐
-│                                                                       │
-│  ┌─────────────────┐         ┌─────────────────┐                     │
-│  │  Event Handler  │ ──1──►  │     GitHub      │                     │
-│  │  (creates job)  │         │ (job/* branch)  │                     │
-│  └────────▲────────┘         └────────┬────────┘                     │
-│           │                           │                              │
-│           │                           2 (triggers run-job.yml)    │
-│           │                           │                              │
-│           │                           ▼                              │
-│           │                  ┌─────────────────┐                     │
-│           │                  │  Docker Agent   │                     │
-│           │                  │  (runs Pi, PRs) │                     │
-│           │                  └────────┬────────┘                     │
-│           │                           │                              │
-│           │                           3 (creates PR)                 │
-│           │                           │                              │
-│           │                           ▼                              │
-│           │                  ┌─────────────────┐                     │
-│           │                  │     GitHub      │                     │
-│           │                  │   (PR opened)   │                     │
-│           │                  └────────┬────────┘                     │
-│           │                           │                              │
-│           │                           4a (auto-merge.yml)            │
-│           │                           4b (update-event-handler.yml)  │
-│           │                           │                              │
-│           5 (Telegram notification)   │                              │
-│           └───────────────────────────┘                              │
-│                                                                       │
-└───────────────────────────────────────────────────────────────────────┘
+User Registration → Ride Booking → Driver Matching → Real-time Tracking → Payment → Completion
 ```
 
-You talk to your bot on Telegram (or hit a webhook). The Event Handler creates a job branch. GitHub Actions spins up a Docker container with the Pi coding agent. The agent does the work, commits the results, and opens a PR. Auto-merge handles the rest. You get a Telegram notification when it's done.
+### Essential Endpoints (13 Core)
 
----
+| Category | Endpoints | Purpose |
+|----------|-----------|---------|
+| **Authentication** | 3 endpoints | User registration, login, token refresh |
+| **Ride Management** | 4 endpoints | Create, track, cancel, complete rides |
+| **Driver Operations** | 3 endpoints | Availability, accept rides, location updates |
+| **Real-time Tracking** | 2 endpoints | Live tracking, WebSocket communication |
+| **Payment** | 1 endpoint | Process payments and billing |
 
-## Get FREE server time on Github!
+### REST API Structure
 
-| | thepopebot | Other platforms |
-|---|---|---|
-| **Public repos** | Free. $0. GitHub Actions doesn't charge. | $20-100+/month |
-| **Private repos** | 2,000 free minutes/month (every GitHub plan, including free) | $20-100+/month |
-| **Infrastructure** | GitHub Actions (already included) | Dedicated servers |
+- **Base URL**: `https://api.cabservice.com/v1`
+- **Authentication**: JWT Bearer tokens
+- **Data Format**: JSON
+- **HTTP Methods**: GET, POST, PUT, PATCH, DELETE
+- **Status Codes**: Standard HTTP codes (200, 201, 400, 401, 404, etc.)
 
-You just bring your own [Anthropic API key](https://console.anthropic.com/).
+## 📚 Documentation Structure
 
----
+This documentation set includes:
 
-## Get Started
+### 1. [API Specification](./cab-booking-api-specification.md)
+- Complete endpoint documentation with examples
+- Request/response schemas
+- Status codes and error handling
+- Rate limiting and security considerations
 
-### Prerequisites
+### 2. [OpenAPI Specification](./openapi-specification.yaml)
+- Machine-readable API specification
+- Compatible with Swagger UI and other tools
+- Complete schema definitions
+- Ready for code generation
 
-| Requirement | Install |
-|-------------|---------|
-| **Node.js 18+** | [nodejs.org](https://nodejs.org) |
-| **npm** | Included with Node.js |
-| **Git** | [git-scm.com](https://git-scm.com) |
-| **GitHub CLI** | [cli.github.com](https://cli.github.com) |
-| **ngrok*** | [ngrok.com](https://ngrok.com/download) |
+### 3. [Data Flow Diagrams](./data-flow-diagrams.md)
+- Visual representation of system interactions
+- Complete user journey flows
+- Real-time communication patterns
+- Error handling flows
 
-*\*ngrok is only required for local development. Production deployments don't need it.*
+### 4. [Authentication Flow](./authentication-flow.md)
+- JWT token-based authentication
+- Registration and login processes
+- Token refresh mechanisms
+- Security best practices
 
-### Three steps
+### 5. [Implementation Guidelines](./implementation-guidelines.md)
+- Architecture recommendations
+- Technology stack suggestions
+- Database design and schemas
+- Deployment configurations
 
-**Step 1** — Fork this repository:
+## ✨ Key Features
 
-[![Fork this repo](https://img.shields.io/badge/Fork_this_repo-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/stephengpope/thepopebot/fork)
+### Core Functionality
+- ✅ **User Management**: Registration, authentication, profiles
+- ✅ **Ride Booking**: Request rides with pickup/dropoff locations
+- ✅ **Driver Matching**: Automatic nearby driver assignment
+- ✅ **Real-time Tracking**: Live GPS tracking via WebSockets
+- ✅ **Payment Processing**: Secure payment with tips
+- ✅ **Status Management**: Complete ride lifecycle tracking
 
-> GitHub Actions are disabled by default on forks. Go to the **Actions** tab in your fork and enable them.
+### Technical Features
+- ✅ **JWT Authentication**: Secure token-based auth with refresh
+- ✅ **RESTful Design**: Clean, intuitive API structure
+- ✅ **Real-time Communication**: WebSocket + fallback options
+- ✅ **Rate Limiting**: Endpoint-specific rate controls
+- ✅ **Error Handling**: Consistent error response format
+- ✅ **Input Validation**: Comprehensive data validation
+- ✅ **CORS Support**: Cross-origin resource sharing
+- ✅ **OpenAPI Compatible**: Machine-readable specification
 
-**Step 2** — Clone your fork:
+### Production-Ready Features
+- ✅ **Microservices Architecture**: Scalable service boundaries
+- ✅ **Database Design**: PostgreSQL with PostGIS for geospatial
+- ✅ **Caching Strategy**: Redis for sessions and real-time data
+- ✅ **Monitoring**: Health checks, metrics, logging
+- ✅ **Container Support**: Docker and Kubernetes configs
+- ✅ **Security**: Input sanitization, HTTPS, token security
 
+## 🚀 Quick Start
+
+### 1. Review the API Specification
 ```bash
-git clone https://github.com/YOUR_USERNAME/thepopebot.git
-cd thepopebot
+# Read the main specification
+cat cab-booking-api-specification.md
+
+# Or use the OpenAPI spec with Swagger UI
+npx swagger-ui-serve openapi-specification.yaml
 ```
 
-**Step 3** — Run the setup wizard:
-
+### 2. Understand the Core Flow
 ```bash
-npm run setup
+# Review the authentication flow
+cat authentication-flow.md
+
+# Study the data flow diagrams
+cat data-flow-diagrams.md
 ```
 
-The wizard handles everything:
-- Checks prerequisites (Node.js, Git, GitHub CLI, ngrok)
-- Creates a GitHub Personal Access Token
-- Collects API keys (Anthropic required; OpenAI, Groq, and [Brave Search](https://api-dashboard.search.brave.com/app/keys) optional)
-- Sets GitHub repository secrets and variables
-- Sets up Telegram bot
-- Starts the server + ngrok, generates `event_handler/.env`
-- Registers webhooks and verifies everything works
+### 3. Plan Implementation
+```bash
+# Follow implementation guidelines
+cat implementation-guidelines.md
+```
 
-**After setup, message your Telegram bot to create jobs!**
+### 4. Example API Usage
+
+**Register a new user:**
+```bash
+curl -X POST https://api.cabservice.com/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword123",
+    "firstName": "John",
+    "lastName": "Doe",
+    "phoneNumber": "+1234567890",
+    "userType": "passenger"
+  }'
+```
+
+**Book a ride:**
+```bash
+curl -X POST https://api.cabservice.com/v1/rides \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -d '{
+    "pickupLocation": {
+      "lat": 40.7128,
+      "lng": -74.0060,
+      "address": "123 Main St, New York, NY"
+    },
+    "dropoffLocation": {
+      "lat": 40.7589,
+      "lng": -73.9851,
+      "address": "456 Broadway, New York, NY"
+    },
+    "rideType": "standard"
+  }'
+```
+
+## 🏗️ Architecture Overview
+
+### Microservices Design
+```
+API Gateway → Authentication Service → User Service
+     ↓              ↓                    ↓
+Location Service ← Ride Service → Payment Service
+     ↓              ↓                    ↓
+WebSocket Server ← Driver Service → Notification Service
+```
+
+### Technology Stack
+- **Backend**: Node.js, Express.js, PostgreSQL, Redis
+- **Authentication**: JWT tokens with refresh mechanism
+- **Real-time**: WebSockets with fallback to Server-Sent Events
+- **Deployment**: Docker, Kubernetes, Load Balancers
+- **Monitoring**: Prometheus, Health checks, Structured logging
+
+### Database Schema
+- **Users**: Passengers and drivers in unified table
+- **Rides**: Complete ride lifecycle tracking
+- **Locations**: Real-time GPS tracking data
+- **Payments**: Transaction records with gateway integration
+- **Tokens**: Refresh token management
+
+## 🔐 Security & Authentication
+
+### Authentication Strategy
+- **Primary**: JWT access tokens (1 hour expiry)
+- **Refresh**: Long-lived refresh tokens (30 days)
+- **Storage**: Secure client-side storage (Keychain/Keystore)
+- **Validation**: Signature verification, expiry checks
+
+### Security Features
+- ✅ **Rate Limiting**: Per-endpoint and per-user limits
+- ✅ **Input Validation**: Joi schema validation
+- ✅ **CORS Policies**: Configurable origin restrictions
+- ✅ **HTTPS Only**: TLS 1.3 minimum in production
+- ✅ **Password Security**: bcrypt with salt rounds
+- ✅ **Token Security**: Secure transmission and storage
+
+### Authorization Patterns
+- **Role-based**: Passengers vs Drivers vs Admin
+- **Resource-level**: Users can only access their own data
+- **Endpoint-specific**: Different permissions per operation
+
+## 🛠️ Implementation Guidelines
+
+### Development Phases
+
+**Phase 1: Core API (Week 1-2)**
+1. Set up basic Express.js server
+2. Implement authentication endpoints
+3. Create user and ride management
+4. Add basic validation and error handling
+
+**Phase 2: Real-time Features (Week 3)**
+1. Implement WebSocket server
+2. Add location tracking endpoints
+3. Create driver matching logic
+4. Build notification system
+
+**Phase 3: Payment & Polish (Week 4)**
+1. Integrate payment gateway
+2. Add comprehensive testing
+3. Implement monitoring and logging
+4. Performance optimization
+
+**Phase 4: Production Deployment (Week 5)**
+1. Container configuration
+2. Database migration scripts
+3. Load testing and optimization
+4. Security audit and penetration testing
+
+### Technology Choices
+
+**Recommended Stack:**
+- **Node.js 18 LTS** - JavaScript runtime
+- **Express.js 4.x** - Web framework
+- **PostgreSQL 15** - Primary database with PostGIS
+- **Redis 7.x** - Caching and session storage
+- **Docker** - Containerization
+- **Kubernetes** - Orchestration
+
+**Alternative Stacks:**
+- **Python + FastAPI** - High performance async
+- **Go + Gin** - Ultra-high performance
+- **Java + Spring Boot** - Enterprise-grade
+
+### Database Considerations
+- **PostgreSQL with PostGIS** for geospatial queries
+- **Connection pooling** for performance
+- **Read replicas** for scaling reads
+- **Indexed queries** for location searches
+- **Partitioning** for large datasets
+
+## 📈 Scalability Considerations
+
+### Performance Targets
+- **Response Time**: < 200ms for 95% of requests
+- **Throughput**: 1000+ requests per second
+- **Availability**: 99.9% uptime
+- **Concurrent Users**: 10,000+ simultaneous
+
+### Scaling Strategy
+1. **Horizontal Scaling**: Multiple API instances
+2. **Database Scaling**: Read replicas, connection pooling
+3. **Caching**: Redis for sessions and frequently accessed data
+4. **CDN**: Static content delivery
+5. **Load Balancing**: Distribute traffic across instances
+
+### Monitoring & Observability
+- **Metrics**: Request counts, response times, error rates
+- **Logging**: Structured JSON logs with correlation IDs
+- **Health Checks**: Deep health monitoring
+- **Alerting**: Automated incident detection
+
+## 🚀 Next Steps
+
+### For Developers
+1. **Start with Core**: Implement authentication and basic ride endpoints
+2. **Add Real-time**: Implement WebSocket communication
+3. **Testing**: Write comprehensive unit and integration tests
+4. **Documentation**: Keep API docs updated as you build
+
+### For Product Teams
+1. **Review User Journey**: Validate the flow meets user needs
+2. **Define Success Metrics**: KPIs for each endpoint
+3. **Plan Rollout**: Phased deployment strategy
+4. **Feedback Loop**: User testing and iteration
+
+### For DevOps Teams
+1. **Infrastructure**: Set up development and staging environments
+2. **CI/CD**: Automated testing and deployment pipelines
+3. **Monitoring**: Observability stack implementation
+4. **Security**: Security scanning and compliance checks
+
+## 📞 API Support
+
+This documentation provides a complete foundation for implementing a production-ready cab booking service. The design focuses on:
+
+- **Minimal Viable Product**: 13 core endpoints for full functionality
+- **Production Ready**: Security, scalability, and reliability built-in
+- **Developer Friendly**: Clear documentation and examples
+- **Extensible**: Easy to add features like ride sharing, delivery, etc.
+
+## 📄 License
+
+This API specification is provided as documentation and can be used as a reference for implementing your own cab booking service.
 
 ---
 
-## Docs
-
-| Document | Description |
-|----------|-------------|
-| [Architecture](docs/ARCHITECTURE.md) | Two-layer design, file structure, API endpoints, GitHub Actions, Docker agent |
-| [Configuration](docs/CONFIGURATION.md) | Environment variables, GitHub secrets, repo variables, ngrok, Telegram setup |
-| [Customization](docs/CUSTOMIZATION.md) | Personality, skills, operating system files, using your bot, security details |
-| [Auto-Merge](docs/AUTO_MERGE.md) | Auto-merge controls, ALLOWED_PATHS configuration |
-| [How to Use Pi](docs/HOW_TO_USE_PI.md) | Guide to the Pi coding agent |
-| [Security](docs/SECURITY_TODO.md) | Security hardening plan |
+**Ready to build your cab booking service?** Start with the [API Specification](./cab-booking-api-specification.md) and follow the [Implementation Guidelines](./implementation-guidelines.md) for a complete development roadmap.
