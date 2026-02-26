@@ -1,6 +1,121 @@
-# Daily Financial Report
+# Daily Financial Report — February 18, 2026
 
-> No report has been generated yet. The first report will be created at the next scheduled run (6:00 AM Pacific, weekdays).
+> Generated at 14:01 UTC | Pre-market briefing
+
+---
+
+## ⚠️ Configuration Required
+
+**Status: Unable to generate market data**
+
+The financial advisor agent requires a Brave Search API key to fetch real-time market data. Currently, no `BRAVE_API_KEY` is configured in the LLM_SECRETS.
+
+### Setup Instructions
+
+1. **Get API Key**: Visit [Brave Search API Dashboard](https://api-dashboard.search.brave.com/app/keys) to obtain a free API key
+2. **Configure Secrets**: Add the API key to your thepopebot configuration:
+   ```bash
+   # In your LLM_SECRETS configuration:
+   {
+     "BRAVE_API_KEY": "your-api-key-here"
+   }
+   ```
+3. **Redeploy**: The next scheduled run will automatically fetch market data
+
+---
+
+## 📊 Major Indices
+
+| Index | Last Close | Change | % Change |
+|-------|-----------|--------|----------|
+| S&P 500 | — | — | — |
+| Dow Jones | — | — | — |
+| Nasdaq Composite | — | — | — |
+| Russell 2000 | — | — | — |
+
+**Pre-market Futures:**
+- Data unavailable (API key required)
+
+---
+
+## 🌍 Global Markets
+
+### Asia-Pacific
+- Data unavailable (API key required)
+
+### Europe
+- Data unavailable (API key required)
+
+---
+
+## 📈 Bonds & Rates
+
+- **10-Year Treasury Yield:** Data unavailable (API key required)
+- **2-Year Treasury Yield:** Data unavailable (API key required)
+- **2s/10s Spread:** Data unavailable (API key required)
+- **Fed Funds Rate:** Data unavailable (API key required)
+
+---
+
+## 🛢️ Commodities
+
+| Commodity | Price | Change |
+|-----------|-------|--------|
+| WTI Crude Oil | — | — |
+| Gold | — | — |
+| Silver | — | — |
+| Natural Gas | — | — |
+
+---
+
+## 💱 Currencies
+
+- **DXY (Dollar Index):** Data unavailable (API key required)
+- **EUR/USD:** Data unavailable (API key required)
+- **USD/JPY:** Data unavailable (API key required)
+- **GBP/USD:** Data unavailable (API key required)
+
+---
+
+## 📰 Key Headlines
+
+1. Unable to fetch current market headlines (API key required)
+2. Configure BRAVE_API_KEY to enable automatic market research
+3. Visit https://api-dashboard.search.brave.com/app/keys for setup
+4. Add key to LLM_SECRETS configuration
+5. Next scheduled run will fetch real market data
+
+---
+
+## 🏭 Sector Watch
+
+- **Top Performing:** Data unavailable (API key required)
+- **Worst Performing:** Data unavailable (API key required)
+- **Notable Movers:** Data unavailable (API key required)
+
+---
+
+## 📅 Economic Calendar (Today)
+
+| Time (ET) | Event | Consensus | Prior |
+|-----------|-------|-----------|-------|
+| — | Data unavailable | — | — |
+
+---
+
+## 🔍 Analysis & Outlook
+
+**Configuration Required**: This financial advisor agent is ready to provide comprehensive daily market research, but requires a Brave Search API key to access real-time financial data.
+
+Once configured, the agent will automatically:
+- Fetch pre-market futures data
+- Research global market movements overnight
+- Track Treasury yields and Federal Reserve developments
+- Monitor commodities and currency movements
+- Gather key financial headlines and economic indicators
+- Analyze sector performance and notable earnings
+
+The system is designed to run automatically on weekdays at 6:00 AM Pacific time to provide pre-market briefings.
 
 ---
 
